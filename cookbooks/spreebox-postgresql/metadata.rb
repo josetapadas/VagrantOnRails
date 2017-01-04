@@ -1,0 +1,10 @@
+name             'spreebox-postgresql'
+maintainer       'josé tapadas alves'
+maintainer_email 'j.alves@runtime-revolution.com'
+license          'All rights reserved'
+description      'Installs/Configures spreebox-postgresql'
+long_description 'Installs/Configures spreebox-postgresql'
+version          '0.1.0'
+
+depends 'postgresql'
+depends 'database'
