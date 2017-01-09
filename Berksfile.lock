@@ -1,9 +1,13 @@
 DEPENDENCIES
   git (~> 5.0.1)
+  imagemagick (~> 0.2.3)
   java (~> 1.45.0)
   nodejs (~> 3.0.0)
+  phantomjs2 (~> 1.1.0)
   redisio (~> 2.5.0)
   rvm (~> 0.9.4)
+  spreebox-custom
+    path: cookbooks/spreebox-custom
   spreebox-elasticsearch
     path: cookbooks/spreebox-elasticsearch
   spreebox-postgresql
@@ -36,6 +40,8 @@ GRAPH
     dmg (>= 0.0.0)
     yum-epel (>= 0.0.0)
   homebrew (3.0.0)
+  hostsfile (2.4.5)
+  imagemagick (0.2.3)
   java (1.45.0)
     apt (>= 0.0.0)
     homebrew (>= 0.0.0)
@@ -52,6 +58,7 @@ GRAPH
   ohai (4.2.3)
     compat_resource (>= 12.14.7)
   openssl (6.0.0)
+  phantomjs2 (1.1.0)
   postgresql (5.2.0)
     apt (>= 1.9.0)
     build-essential (>= 2.0.0)
@@ -64,6 +71,8 @@ GRAPH
     java (>= 0.0.0)
   seven_zip (2.0.2)
     windows (>= 1.2.2)
+  spreebox-custom (0.1.0)
+    hostsfile (~> 2.4.5)
   spreebox-elasticsearch (0.1.0)
     elasticsearch (>= 2.0.0)
   spreebox-postgresql (0.1.0)
