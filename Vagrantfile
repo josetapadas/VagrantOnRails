@@ -10,7 +10,8 @@ Vagrant.configure("2") do |config|
 
   # port forwarding by service
   config.vm.network "forwarded_port", guest: 9200, host: 9200   # elasticsearch
-  config.vm.network "forwarded_port", guest: 3000, host: 3000   # rails app
+  config.vm.network "forwarded_port", guest: 9292, host: 9292   # rails app
+  config.vm.network "forwarded_port", guest: 8080, host: 8080   # lola shop
   config.vm.network "forwarded_port", guest: 5432, host: 5432   # postgres
   config.vm.network "forwarded_port", guest: 6379, host: 6379   # redis
 
@@ -23,7 +24,7 @@ Vagrant.configure("2") do |config|
   config.omnibus.chef_version = "12.9.41"
   config.berkshelf.enabled = true
 
-  config.vm.synced_folder "./spreeapp", "/spreeapp", type: 'nfs'
+  config.vm.synced_folder "./spreeapp", "/opt/www", owner: "vagrant", group: "vagrant"
 
   config.vm.provision :chef_solo do |chef|
     chef.add_recipe "git"
@@ -32,10 +33,13 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "nodejs"
     chef.add_recipe 'redisio'
     chef.add_recipe 'redisio::enable'
+    chef.add_recipe 'imagemagick'
+    chef.add_recipe 'phantomjs2'
 
     # custom cookbooks
     chef.add_recipe "spreebox-elasticsearch"
     chef.add_recipe "spreebox-postgresql"
+    chef.add_recipe "spreebox-custom"
 
     chef.json = {
       localegen: {
@@ -50,10 +54,11 @@ Vagrant.configure("2") do |config|
       },
       rvm: {
         group_users: ["vagrant"],
-        default_ruby: "2.4.0",
+        default_ruby: "2.3.3",
         global_gems: [
           { name: "bundler" }
-        ]
+        ],
+        rubies: ["2.2.2"]
       },
       nodejs: {
         install_method: "binary",
